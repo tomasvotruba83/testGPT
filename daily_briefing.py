@@ -109,3 +109,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+def append_to_sheet(worksheet, data):
+    """
+    Zapíše jeden řádek do Google Sheetu.
+    """
+    worksheet.append_row(data, value_input_option="USER_ENTERED")
