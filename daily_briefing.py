@@ -77,7 +77,21 @@ Zprávy:
             "keywords": ""
         }
 
+for ticker in TICKERS:
+    news_text = fetch_news(ticker)
+    result = analyze_text(ticker, news_text)
 
+    row = [
+        ticker,
+        TICKER_SECTOR.get(ticker, "Unknown"),
+        result.get("sentiment", ""),
+        result.get("summary", ""),
+        result.get("recommendation", ""),
+        result.get("ai_risk_score", 0),
+        result.get("keywords", "")
+    ]
+
+    append_to_sheet(worksheet, row)
 def append_to_sheet(row: list):
     """Append a row to the Google Sheet."""
     scopes = ["https://www.googleapis.com/auth/spreadsheets"]
